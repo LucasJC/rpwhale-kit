@@ -1,1 +1,1 @@
-<p>ABOUT</p>
+<p>About page</p>
