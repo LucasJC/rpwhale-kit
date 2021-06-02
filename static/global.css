@@ -1,0 +1,3 @@
+  .desaturated {
+    filter: saturate(25%);
+  }

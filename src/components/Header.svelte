@@ -1,53 +1,49 @@
 <script lang="ts">
-  //import { nightMode } from "../domain/store";
-  //import NightModeToggle from "./NightModeToggle.svelte";
-  import { page } from '$app/stores';
-
-  let isMenuActive = false;
+	import { page } from '$app/stores';
+	import { nightMode } from '../domain/night-mode';
+	import NightModeToggle from './NightModeToggle.svelte';
+	let isMenuActive = false;
 </script>
 
-<main>
-  <section class="hero">
-      <nav class="navbar hero-body" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <div class="column">
-            <p class="title">
-              RP Whale <span class:night-whale={false}>🐳</span>
-            </p>
-            <p class="subtitle">
-              Unofficial staking calculator utility for <a
-                href="https://rplanet.io"
-                target="_blank">RPlanet</a
-              >.
-            </p>
-          </div>
-          <!-- svelte-ignore a11y-missing-attribute -->
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" class:is-active={isMenuActive} on:click={() => isMenuActive = !isMenuActive}>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-        <div class="navbar-menu" class:is-active={isMenuActive}>
-          <div class="navbar-start">
-            <!-- navbar items -->
-          </div>
+<section class="hero">
+	<nav class="navbar hero-body" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<div class="column">
+				<p class="title">
+					RP Whale <span class:desaturated={$nightMode}>🐳</span>
+				</p>
+				<p class="subtitle">
+					Unofficial staking calculator utility for <a href="https://rplanet.io" target="_blank"
+						>RPlanet</a
+					>.
+				</p>
+			</div>
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<a
+				role="button"
+				class="navbar-burger"
+				aria-label="menu"
+				aria-expanded="false"
+				class:is-active={isMenuActive}
+				on:click={() => (isMenuActive = !isMenuActive)}
+			>
+				<span aria-hidden="true" />
+				<span aria-hidden="true" />
+				<span aria-hidden="true" />
+			</a>
+		</div>
+		<div class="navbar-menu" class:is-active={isMenuActive}>
+			<div class="navbar-start">
+				<!-- navbar items -->
+			</div>
 
-          <div class="navbar-end">
-            <a class="navbar-item" class:is-active={$page.path === '/'} href="/">
-              Staking
-            </a>
-            <a class="navbar-item" class:is-active={$page.path === '/about'} href="/about">
-              About
-            </a>
-          </div>
-        </div>
-      </nav>
-  </section>
-</main>
-
-<style>
-  .night-whale {
-    filter: saturate(0%);
-  }
-</style>
+			<div class="navbar-end">
+				<a class="navbar-item" class:is-active={$page.path === '/'} href="/"> Staking </a>
+				<a class="navbar-item" class:is-active={$page.path === '/about'} href="/about"> About </a>
+				<div class="navbar-item">
+					<NightModeToggle />
+				</div>
+			</div>
+		</div>
+	</nav>
+</section>
