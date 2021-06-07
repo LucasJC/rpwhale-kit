@@ -27,7 +27,7 @@ export const accountLands: Readable<Array<ListingAsset>> = derived(
 				);
 				set(landAssets || []);
 			} else {
-				set ([]);
+				set([]);
 			}
 		}
 		doWork();

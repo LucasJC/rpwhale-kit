@@ -35,7 +35,7 @@ function createUserStore() {
 		setAccount: (account: string) => {
 			store.update((state) => ({ ...state, account }));
 		}
-	}
+	};
 }
 
 export const userStore = createUserStore();

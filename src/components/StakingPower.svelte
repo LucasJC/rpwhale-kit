@@ -40,7 +40,7 @@
 				</tr>
 			</table>
 		{:else}
-		 <p>No staked assets found for this account.</p>
+			<p>No staked assets found for this account.</p>
 		{/if}
 	</div>
 </main>

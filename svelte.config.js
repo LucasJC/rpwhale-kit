@@ -5,15 +5,15 @@ import vercel from '@sveltejs/adapter-vercel';
 const config = {
 	preprocess: preprocess(),
 	kit: {
-		target: "#svelte",
+		target: '#svelte',
 		adapter: vercel(),
 		ssr: false,
 		prerender: {
-			enabled: false,
+			enabled: false
 		},
 		vite: {
 			optimizeDeps: {
-				include: ["atomicmarket"]
+				include: ['atomicmarket']
 			}
 		}
 	}
