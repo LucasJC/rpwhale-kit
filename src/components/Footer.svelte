@@ -7,7 +7,7 @@
 		<div class="content has-text-centered">
 			<!--<Donations />-->
 			<p>
-				Sources available at <a href="https://github.com/LucasJC/rpwhale">github</a>
+				Sources / issues at <a href="https://github.com/LucasJC/rpwhale" target="_blank">github <span class="fab fa-github"></span></a> 
 			</p>
 			<p>
 				<a href="mailto:lucas.couchot+rplstkexpl@gmail.com">Contact us</a>

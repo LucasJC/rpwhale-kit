@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { userStore } from '../domain/user';
-	import * as User from '../domain/user';
 
 	export let accountInput: string;
 
@@ -10,14 +9,14 @@
 		goto(`/staking?account=${accountInput}`);
 	}
 
-	// async function login() {
-	//   try {
-	//     await User.wcwLogin();
-	//     accountInput = $userStore.account;
-	//   } catch (err) {
-	//     console.error(err);
-	//   }
-	// }
+	async function login() {
+	  // try {
+	  //   await wcwLogin();
+	  //   accountInput = $userStore.account;
+	  // } catch (err) {
+	  //   console.error(err);
+	  // }
+	}
 </script>
 
 <main>
@@ -30,13 +29,13 @@
 				<div class="control">
 					<button type="submit" class="button is-info" on:click={setAccount}> Calculate </button>
 				</div>
-				<!-- <div class="control" on:click={login}>
-          <button class="button is-link" class:is-loading={$userStore.loading}>
+				<div class="control" on:click={login}>
+          <button class="button is-link" class:is-loading={$userStore.loading} disabled>
             {#if !$userStore.loading}
               <span class="login-wax" />
             {/if}
           </button>
-        </div> -->
+        </div>
 			</div>
 		</form>
 	</div>
