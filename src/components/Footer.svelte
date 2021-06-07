@@ -12,7 +12,7 @@
 				>
 			</p>
 			<p>
-				<a href="mailto:lucas.couchot+rplstkexpl@gmail.com">Contact us</a>
+				<a href="/donations">Support our work</a>
 			</p>
 		</div>
 	</footer>
