@@ -1,6 +1,6 @@
 import { ALCOR_MARKET, getAlcorPrice } from '../dal/alcor';
 import { getWaxPriceInUSD } from '../dal/coingecko';
-import { readable, Subscriber } from 'svelte/store';
+import { derived, Readable, readable, Subscriber } from 'svelte/store';
 
 const DEFAULT_INTERVAL_FREQ = 10000;
 
@@ -14,23 +14,64 @@ export const waxPrice = readable(0.0, function start(set) {
 	};
 });
 
-export const aetherPrice = readable(0.0, function start(set) {
+/**
+ * get price in wax for a given token,
+ * we are pretty flexible with the key you pass in.
+ */
+export function getRPlanetPrice(prices: IPricesInWax, currency: string): number {
+	const cur = currency.toUpperCase();
+	if (cur.includes('AETHER')) {
+		return prices.AETHER;
+	}
+	if (cur.includes('CAPON')) {
+		return prices.CAPON;
+	}
+	if (cur.includes('ENEFT')) {
+		return prices.CAPON;
+	}
+	if (cur.includes('WAXON')) {
+		return prices.WAXON;
+	}
+	if (cur.includes('WECAN')) {
+		return prices.WECAN;
+	}
+	console.warn('Price not found', currency, prices);
+	return 0;
+}
+
+export interface IPricesInWax {
+	AETHER: number;
+	CAPON: number;
+	ENEFT: number;
+	WAXON: number;
+	WECAN: number;
+}
+
+export function format(input: number | undefined): string {
+	const numberToFormat = input || 0;
+	return numberToFormat.toLocaleString('en-us', {
+		minimumFractionDigits: 3,
+		maximumFractionDigits: 3
+	});
+}
+
+const aetherPrice = readable(0.0, function start(set) {
 	return _setAlcorPriceWithInterval(ALCOR_MARKET.AETHER, set);
 });
 
-export const wecanPrice = readable(0.0, function start(set) {
+const wecanPrice = readable(0.0, function start(set) {
 	return _setAlcorPriceWithInterval(ALCOR_MARKET.WECAN, set);
 });
 
-export const caponPrice = readable(0.0, function start(set) {
+const caponPrice = readable(0.0, function start(set) {
 	return _setAlcorPriceWithInterval(ALCOR_MARKET.CAPON, set);
 });
 
-export const waxonPrice = readable(0.0, function start(set) {
+const waxonPrice = readable(0.0, function start(set) {
 	return _setAlcorPriceWithInterval(ALCOR_MARKET.WAXON, set);
 });
 
-export const eneftPrice = readable(0.0, function start(set) {
+const eneftPrice = readable(0.0, function start(set) {
 	return _setAlcorPriceWithInterval(ALCOR_MARKET.ENEFT, set);
 });
 
@@ -47,3 +88,16 @@ function _setAlcorPriceWithInterval(
 		clearInterval(interval);
 	};
 }
+
+export const rplanetPrices: Readable<IPricesInWax> = derived(
+	[aetherPrice, caponPrice, eneftPrice, waxonPrice, wecanPrice],
+	([$aetherPrice, $caponPrice, $eneftPrice, $waxonPrice, $wecanPrice]) => {
+		return {
+			AETHER: $aetherPrice,
+			CAPON: $caponPrice,
+			ENEFT: $eneftPrice,
+			WAXON: $waxonPrice,
+			WECAN: $wecanPrice
+		};
+	}
+);
