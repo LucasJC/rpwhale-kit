@@ -4,31 +4,44 @@ import { browser } from '$app/env';
 export const nightMode = createNightMode();
 
 function createNightMode() {
-	let enabled = 'false';
+	let enabled = false;
 	if (browser) {
-		enabled = localStorage.getItem('dark-mode') || 'false';
+		const on = localStorage.getItem('dark-mode') || 'false';
+		enabled = on === 'true';
+		if (enabled) {
+			enableStyles();
+		}
 	}
-	const { subscribe, set } = writable(enabled === 'true');
+	const { subscribe, set } = writable(enabled);
 	return {
 		subscribe,
 		toggle: () => {
 			const on = localStorage.getItem('dark-mode') || 'false';
-			let darkLink = document.getElementById('dark-theme');
 			if (on == 'true') {
 				localStorage.setItem('dark-mode', 'false');
-				if (darkLink) {
-					darkLink.remove();
-				}
+				disableStyles();
 				set(false);
 			} else {
 				localStorage.setItem('dark-mode', 'true');
-				darkLink = document.createElement('link');
-				darkLink.setAttribute('rel', 'stylesheet');
-				darkLink.id = 'dark-theme';
-				darkLink.setAttribute('href', 'https://unpkg.com/bulma-prefers-dark');
-				document.head.appendChild(darkLink);
+				enableStyles();
 				set(true);
 			}
 		}
 	};
+}
+
+function disableStyles() {
+	const darkLink = document.getElementById('dark-theme');
+	if (darkLink) {
+		darkLink.remove();
+	}
+}
+
+function enableStyles() {
+	let darkLink = document.getElementById('dark-theme');
+	darkLink = document.createElement('link');
+	darkLink.setAttribute('rel', 'stylesheet');
+	darkLink.id = 'dark-theme';
+	darkLink.setAttribute('href', 'https://unpkg.com/bulma-prefers-dark');
+	document.head.appendChild(darkLink);
 }

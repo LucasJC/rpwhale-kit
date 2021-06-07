@@ -38,7 +38,7 @@
 			</div>
 
 			<div class="navbar-end">
-				<a class="navbar-item" class:is-active={$page.path === '/'} href="/"> Staking </a>
+				<a class="navbar-item" class:is-active={$page.path === '/'} href="/"> Home </a>
 				<a class="navbar-item" class:is-active={$page.path === '/about'} href="/about"> About </a>
 				<div class="navbar-item">
 					<NightModeToggle />
