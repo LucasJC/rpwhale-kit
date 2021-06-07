@@ -10,12 +10,12 @@
 	}
 
 	async function login() {
-	  // try {
-	  //   await wcwLogin();
-	  //   accountInput = $userStore.account;
-	  // } catch (err) {
-	  //   console.error(err);
-	  // }
+		// try {
+		//   await wcwLogin();
+		//   accountInput = $userStore.account;
+		// } catch (err) {
+		//   console.error(err);
+		// }
 	}
 </script>
 
@@ -30,12 +30,12 @@
 					<button type="submit" class="button is-info" on:click={setAccount}> Calculate </button>
 				</div>
 				<div class="control" on:click={login}>
-          <button class="button is-link" class:is-loading={$userStore.loading} disabled>
-            {#if !$userStore.loading}
-              <span class="login-wax" />
-            {/if}
-          </button>
-        </div>
+					<button class="button is-link" class:is-loading={$userStore.loading} disabled>
+						{#if !$userStore.loading}
+							<span class="login-wax" />
+						{/if}
+					</button>
+				</div>
 			</div>
 		</form>
 	</div>
